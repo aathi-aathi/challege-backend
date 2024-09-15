@@ -4,9 +4,9 @@ const editRouter = express.Router()
 editRouter.post('/:id',async(req,res)=>{
     const id = Number(req.params.id)
     const userData = req.body
-    console.log(userData.status)
+    
     const showDate = new Date()
-    const date = showDate.getDate()+'/'+showDate.getMonth()+'/'+showDate.getFullYear()
+    const date = showDate.getDate()+'/'+(showDate.getMonth()+1)+'/'+showDate.getFullYear()
     try {
       if(userData.status == 'incompleted'){
         await db.collection('challenges').updateOne({id:id},{$set:{isCompleted:userData.status},$unset:{date}})
